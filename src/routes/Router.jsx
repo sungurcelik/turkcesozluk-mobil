@@ -10,6 +10,7 @@ import HistoryIcon from '../iconsJs/historyIcon';
 import SearchIcon from '../iconsJs/searchIcon';
 import renderTabIcon from '../utils/helper';
 import theme from '../utils/theme';
+import {View} from 'react-native';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -49,7 +50,18 @@ export default function App() {
           name="Search"
           component={HomeStackScreen}
           options={{
-            tabBarIcon: ({color}) => <SearchIcon />,
+            tabBarIcon: ({color}) => (
+              <View
+                style={{
+                  backgroundColor: 'red',
+                  padding: 25,
+                  borderRadius: 9999,
+                  borderWidth: 20,
+                  borderColor: 'white',
+                }}>
+                <SearchIcon color={'white'} />
+              </View>
+            ),
             tabBarLabel: '',
           }}
         />

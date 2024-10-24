@@ -1,4 +1,5 @@
 import React from 'react';
+import {View} from 'react-native';
 import Svg, {ClipPath, Defs, G, Path, Polyline} from 'react-native-svg';
 
 const HistoryIcon = ({width = 32, height = 32, color = 'currentColor'}) => {
