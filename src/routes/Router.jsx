@@ -9,16 +9,48 @@ import BookmarkIcon from '../iconsJs/bookmarkIcon';
 import HistoryIcon from '../iconsJs/historyIcon';
 import SearchIcon from '../iconsJs/searchIcon';
 import renderTabIcon from '../utils/helper';
+import {Button, TouchableOpacity, View} from 'react-native';
 import theme from '../utils/theme';
-import {View} from 'react-native';
+import LeftArrowIcon from '../iconsJs/leftArrowIcon';
+import MoreIcon from '../iconsJs/moreIcon';
 
 const HomeStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Search" component={SearchScreen} />
-      <HomeStack.Screen name="Detail" component={DetailScreen} />
+      <HomeStack.Screen
+        options={{headerShown: false}}
+        name="Search"
+        component={SearchScreen}
+      />
+      <HomeStack.Screen
+        options={({route, navigation}) => {
+          return {
+            title: (route.params && route.params.title) || 'Boş',
+            headerStyle: {
+              backgroundColor: theme.colors.red,
+            },
+            headerShadowVisible: false,
+            headerLeft: () => (
+              <TouchableOpacity
+                style={{paddingHorizontal: 20, height: '100%'}}
+                onPress={() => navigation.navigate('Search')}>
+                <LeftArrowIcon color={theme.colors.textDark} />
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity
+                style={{paddingHorizontal: 20, height: '100%'}}
+                onPress={() => navigation.navigate('Search')}>
+                <MoreIcon color={theme.colors.textDark} />
+              </TouchableOpacity>
+            ),
+          };
+        }}
+        name="Detail"
+        component={DetailScreen}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -34,8 +66,9 @@ export default function App() {
           headerShown: false,
           tabBarStyle: {
             height: 120,
-            backgroundColor: 'white',
-            borderTopColor: 'white',
+            shadowColor: '#000',
+            shadowOpacity: 0.1,
+            shadowRadius: 20,
           },
         }}>
         <Tab.Screen
@@ -62,7 +95,6 @@ export default function App() {
                 <SearchIcon color={'white'} />
               </View>
             ),
-            tabBarLabel: '',
           }}
         />
         <Tab.Screen

@@ -12,9 +12,13 @@ import theme from '../utils/theme';
 import SearchIcon from '../iconsJs/searchIcon';
 import CloseIcon from '../iconsJs/closeIcon';
 
-const CustomInput = () => {
+const CustomInput = ({onChangeFocus}) => {
   const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    onChangeFocus(isFocus);
+  }, [isFocus, onChangeFocus]);
 
   const onCancel = () => {
     setIsFocus(false);
@@ -51,7 +55,7 @@ const CustomInput = () => {
         </TouchableOpacity>
       )}
       {isFocus && (
-        <Button title="Vazgeç" onPress={onCancel} style={styles.cancel} />
+        <Button title="Vazgeç" onPress={onCancel} color={theme.colors.textDark} style={styles.cancel} />
       )}
     </View>
   );

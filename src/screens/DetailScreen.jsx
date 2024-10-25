@@ -1,20 +1,33 @@
 import {StyleSheet, Text, View} from 'react-native';
-import Svg, { Circle } from 'react-native-svg';
+import theme from '../utils/theme';
+import ActionButton, {ActionButtonTitle} from '../components/ActionButton';
+import MoreIcon from '../iconsJs/moreIcon';
 
 const DetailScreen = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Details!</Text>
-      <Svg height="200" width="200">
-        <Circle
-          cx="100"  // Dairenin merkezinin x koordinatı
-          cy="100"  // Dairenin merkezinin y koordinatı
-          r="80"    // Dairenin yarıçapı
-          stroke="blue"  // Dairenin kenar rengi
-          strokeWidth="2" // Kenar kalınlığı
-          fill="red"      // Dairenin iç rengi
-        />
-      </Svg>
+    <View style={{backgroundColor: theme.colors.softRed, padding: 16}}>
+      <View>
+        <Text style={{fontSize: 32, fontWeight: 'bold'}}>Details!</Text>
+        <Text style={{color: theme.colors.textLight, marginTop: 6}}>
+          Arapça kalem
+        </Text>
+      </View>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row'}}>
+          <ActionButton>
+            <MoreIcon />
+          </ActionButton>
+          <ActionButton>
+            <MoreIcon />
+          </ActionButton>
+        </View>
+        <View>
+          <ActionButton>
+            <MoreIcon />
+            <ActionButtonTitle>Türk İşaret Dili</ActionButtonTitle>
+          </ActionButton>
+        </View>
+      </View>
     </View>
   );
 };
