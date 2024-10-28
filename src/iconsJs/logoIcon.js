@@ -1,8 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
-import Svg, {ClipPath, Defs, G, Path, Polyline} from 'react-native-svg';
+import Svg, {ClipPath, Defs, G, Path} from 'react-native-svg';
 
-const HistoryIcon = ({width = 32, height = 32, color = 'currentColor'}) => {
+const LogoIcon = ({width = 32, height = 32, color = 'currentColor'}) => {
   return (
     <Svg
       width={width}
@@ -85,4 +84,4 @@ const HistoryIcon = ({width = 32, height = 32, color = 'currentColor'}) => {
   );
 };
 
-export default HistoryIcon;
+export default LogoIcon;

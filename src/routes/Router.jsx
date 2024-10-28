@@ -21,28 +21,28 @@ function HomeStackScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen
         options={{headerShown: false}}
-        name="Search"
+        name="HomeSearch"
         component={SearchScreen}
       />
       <HomeStack.Screen
         options={({route, navigation}) => {
           return {
-            title: (route.params && route.params.title) || 'Boş',
+            title: route?.params?.title || 'Boş',
             headerStyle: {
-              backgroundColor: theme.colors.red,
+              backgroundColor: 'white',
             },
             headerShadowVisible: false,
             headerLeft: () => (
               <TouchableOpacity
                 style={{paddingHorizontal: 20, height: '100%'}}
-                onPress={() => navigation.navigate('Search')}>
+                onPress={() => navigation.navigate('HomeSearch')}>
                 <LeftArrowIcon color={theme.colors.textDark} />
               </TouchableOpacity>
             ),
             headerRight: () => (
               <TouchableOpacity
                 style={{paddingHorizontal: 20, height: '100%'}}
-                onPress={() => navigation.navigate('Search')}>
+                onPress={() => navigation.navigate('HomeSearch')}>
                 <MoreIcon color={theme.colors.textDark} />
               </TouchableOpacity>
             ),

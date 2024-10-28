@@ -2,19 +2,30 @@ import {
   Button,
   Keyboard,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import theme from '../utils/theme';
 import SearchIcon from '../iconsJs/searchIcon';
 import CloseIcon from '../iconsJs/closeIcon';
+import {debounce} from 'lodash';
 
-const CustomInput = ({onChangeFocus}) => {
+const CustomInput = ({onChangeFocus,fetchSearchResults}) => {
   const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState('');
+
+  
+  // Debounced search function
+  const debouncedFetchSearchResults = useCallback(debounce(fetchSearchResults, 500), []);
+
+  const handleChange = (text) => {
+    setValue(text);
+    if (text) {
+      debouncedFetchSearchResults(text); // Debounce ile arama yap
+    }
+  };
 
   useEffect(() => {
     onChangeFocus(isFocus);
@@ -28,6 +39,7 @@ const CustomInput = ({onChangeFocus}) => {
   const onClear = () => {
     setValue('');
   };
+
 
   return (
     <View style={styles.container}>
@@ -44,7 +56,7 @@ const CustomInput = ({onChangeFocus}) => {
           placeholder="Türkçe Sözlük'te Ara"
           placeholderTextColor={theme.colors.textMedium}
           value={value}
-          onChangeText={text => setValue(text)}
+          onChangeText={handleChange}
         />
       </TouchableOpacity>
       {value.length > 0 && (
@@ -55,7 +67,12 @@ const CustomInput = ({onChangeFocus}) => {
         </TouchableOpacity>
       )}
       {isFocus && (
-        <Button title="Vazgeç" onPress={onCancel} color={theme.colors.textDark} style={styles.cancel} />
+        <Button
+          title="Vazgeç"
+          onPress={onCancel}
+          color={theme.colors.textDark}
+          style={styles.cancel}
+        />
       )}
     </View>
   );
