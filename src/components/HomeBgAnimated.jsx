@@ -4,7 +4,7 @@ import LogoIcon from '../iconsJs/logoIcon';
 import CustomInput from './CustomInput';
 import {useEffect, useRef} from 'react';
 
-const HomeBgAnimated = ({isSearchFocus, onSearchFocus}) => {
+const HomeBgAnimated = ({isSearchFocus, onSearchFocus, setSearchQuery}) => {
   const bgOpacity = useRef(new Animated.Value(1)).current;
   const heroHeight = useRef(new Animated.Value(285)).current;
 
@@ -22,7 +22,6 @@ const HomeBgAnimated = ({isSearchFocus, onSearchFocus}) => {
       console.error('Fetch hatası:', error);
     }
   };
-
 
   useEffect(() => {
     if (isSearchFocus) {
@@ -76,7 +75,10 @@ const HomeBgAnimated = ({isSearchFocus, onSearchFocus}) => {
           width: '100%',
           marginBottom: -42,
         }}>
-        <CustomInput fetchSearchResults={fetchSearchResults} onChangeFocus={status => onSearchFocus(status)} />
+        <CustomInput
+          onChangeFocus={onSearchFocus}
+          onSearchChange={setSearchQuery}
+        />
       </View>
     </Animated.View>
   );

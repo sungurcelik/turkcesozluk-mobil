@@ -12,19 +12,19 @@ import SearchIcon from '../iconsJs/searchIcon';
 import CloseIcon from '../iconsJs/closeIcon';
 import {debounce} from 'lodash';
 
-const CustomInput = ({onChangeFocus,fetchSearchResults}) => {
+const CustomInput = ({onChangeFocus, onSearchChange}) => {
   const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState('');
 
-  
   // Debounced search function
-  const debouncedFetchSearchResults = useCallback(debounce(fetchSearchResults, 500), []);
+  const debouncedOnSearchChange = useCallback(debounce(onSearchChange, 500), [
+    onSearchChange,
+  ]);
 
-  const handleChange = (text) => {
+
+  const handleChange = text => {
     setValue(text);
-    if (text) {
-      debouncedFetchSearchResults(text); // Debounce ile arama yap
-    }
+    debouncedOnSearchChange(text); // `text` değiştiğinde tetiklenir
   };
 
   useEffect(() => {
@@ -38,8 +38,8 @@ const CustomInput = ({onChangeFocus,fetchSearchResults}) => {
 
   const onClear = () => {
     setValue('');
+    debouncedOnSearchChange('');
   };
-
 
   return (
     <View style={styles.container}>

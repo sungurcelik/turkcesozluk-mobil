@@ -11,8 +11,8 @@ import {useEffect, useState} from 'react';
 
 const DetailScreen = ({route}) => {
   // console.log(route)
-  // const keyword = route.params?.keyword;
-  const keyword = 'Savaş';
+  const keyword = route.params?.keyword;
+  // const keyword = 'Savaş';
   const [data, setData] = useState(null);
 
   const getDetailData = async () => {
@@ -25,6 +25,8 @@ const DetailScreen = ({route}) => {
   useEffect(() => {
     getDetailData();
   }, []);
+
+  
 
   return (
     <View style={{backgroundColor: theme.colors.softRed}}>

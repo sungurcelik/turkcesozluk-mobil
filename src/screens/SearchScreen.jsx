@@ -10,7 +10,6 @@ const SearchScreen = ({navigation}) => {
   const [homeData, setHomeData] = useState();
   const [searchQuery, setSearchQuery] = useState('');
 
-
   const getHomeData = async () => {
     const response = await fetch('https://sozluk.gov.tr/icerik');
     const data = await response.json();
@@ -26,6 +25,7 @@ const SearchScreen = ({navigation}) => {
       <HomeBgAnimated
         isSearchFocus={isSearchFocus}
         onSearchFocus={setIsSearchFocus}
+        setSearchQuery={setSearchQuery} // CustomInput'a aktarılacak
       />
       <View
         style={{
@@ -35,7 +35,9 @@ const SearchScreen = ({navigation}) => {
         }}>
         {isSearchFocus ? (
           <View style={{flex: 1, marginTop: 40}}>
-            <HistorySearchList query={searchQuery} />
+            <HistorySearchList
+              keyword={searchQuery}
+            />
           </View>
         ) : (
           <View style={{flex: 1, paddingHorizontal: 16}}>
